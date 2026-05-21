@@ -1,8 +1,8 @@
-# CLAUDE.md - Vibe Econ Research (Block Cycle v5.0)
+# CLAUDE.md - Vibe Econ Research (Block Cycle v6.0)
 
-**版本**：v5.0 (ARS增强版)
+**版本**：v6.0
 **核心架构**：4板块循环 (Framework -> Empirical -> Writing -> Review)
-**增强来源**：Academic Research Skills (ARS v3.7 by Cheng-I Wu) + Vibe原创
+**增强来源**：ARS v3.9.4 + Pedro Sant'Anna Workflow + CLO-Author + Vibe原创
 
 ---
 
