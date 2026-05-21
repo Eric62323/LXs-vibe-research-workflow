@@ -1,6 +1,6 @@
-# CLAUDE.md - Vibe Econ Research (Block Cycle v6.0)
+# CLAUDE.md - Vibe Econ Research (Block Cycle v6.1)
 
-**版本**：v6.0
+**版本**：v6.1
 **核心架构**：4板块循环 (Framework -> Empirical -> Writing -> Review)
 **增强来源**：ARS v3.9.4 + Pedro Sant'Anna Workflow + CLO-Author + Vibe原创
 
@@ -165,15 +165,15 @@ stata-cli --cwd /Users/liuxin/Desktop/rural_LU run "sum age"
 - **任务**：从数据清洗到计量分析的完整实证流程。
 - **Phase 结构**：
   - Phase 0: 数据清洗（01a→01b→01c）
-  - Phase 1: 数据审查 + 理解确认 + EDA + 描述统计（含论文类型标注）
-  - Phase 2: 主回归 + VERIFY 自动检查
-  - Phase 3: 异质性分析
-  - Phase 4: 稳健性检验
+  - Phase 1: 数据审查 + Five-check Data Contract + Sample-construction log + EDA + 描述统计 + Pre-Analysis Plan
+  - Phase 2: 识别图形 + 正式诊断测试 + 渐进控制主表 + 主回归 + VERIFY 自动检查
+  - Phase 3: 异质性与机制分析
+  - Phase 4: 稳健性检验 + Robustness master table + Specification curve
   - 完整性关卡（量化评分，≥80 分通过）
 - **输出**：`实证结果.md` 或 修正意见。
 - **Agent**：`_系统/实证检验Agent.md`。
 - **参考**：`_系统/参考/论文类型标准清单.md`（6 种论文类型的审稿人期望清单）。
-- **🚪 完整性关卡**：退出前必须通过量化评分关卡（变量一致性、样本量、可复现性、统计诊断、假设对应、论文类型清单核查，≥80 分通过）。
+- **🚪 完整性关卡**：退出前必须通过量化评分关卡（变量一致性与计划锁定、样本量与数据契约、结果可复现性、统计诊断与识别图形、假设对应、论文类型清单核查，≥80 分通过）。
 
 ### Block 3: 写作输出 (`/写作`)
 - **任务**：将素材转化为学术文本。自动执行写作质量检查。
@@ -213,7 +213,7 @@ stata-cli --cwd /Users/liuxin/Desktop/rural_LU run "sum age"
 
 ### 关卡：实证完整性关卡（`/实证` → `/写作`）
 - **位置**：实证检验Agent退出前
-- **检查项**：变量一致性、样本量验证、结果可复现性、统计诊断完整性、结果与假设对应、论文类型清单核查
+- **检查项**：变量一致性与 Pre-Analysis Plan 锁定、Five-check Data Contract、Sample-construction log、结果可复现性、识别图形与正式诊断、渐进控制主表、结果与假设对应、论文类型清单与稳健性总表核查
 - **评分**：量化评分（满分 100），≥80 分通过，60-79 需修正，<60 回到对应 Phase
 - **详见**：`_系统/实证检验Agent.md → 实证完整性关卡`
 
@@ -241,7 +241,7 @@ stata-cli --cwd /Users/liuxin/Desktop/rural_LU run "sum age"
 | 指令 | 对应板块 | 功能 |
 |------|---------|------|
 | **`/框架`** | **概念框架** | 定义问题、修补理论镜头 |
-| **`/实证`** | **实证检验** | 解释回归表格、验证假设 |
+| **`/实证`** | **实证检验** | 数据契约、样本日志、PAP、识别图形、诊断、回归与稳健性 |
 | **`/写作`** | **写作输出** | 撰写章节、润色语言 |
 | **`/审查`** | **论证审查** | **多角色审稿**、评分、苏格拉底辅导、修改指导 |
 | **`/主干`** | **项目管理** | 查看进度、回归当前循环 |
@@ -294,11 +294,11 @@ stata-cli --cwd /Users/liuxin/Desktop/rural_LU run "sum age"
 - **Stata代码**：使用`putdocx`命令，设置`border(all, nil)`移除竖线
 - **详见**：`_系统/学术写作Agent.md → 步骤5：表格规范化`
 
-### **样本量分析** ⭐
-- **回归前**：诊断样本量充足性（N ≥ 400为理想，N ≥ 100为最低要求）
-- **回归后**：报告实际使用样本量、未使用样本量、固定效应吸收情况
-- **缺失值分析**：统计各变量缺失比例，识别样本流失原因
-- **详见**：`_系统/实证检验Agent.md → 步骤1.2.5 样本量与数据质量审查`
+### **样本量、数据契约与样本构造日志** ⭐
+- **回归前**：通过 Five-check Data Contract 诊断主键唯一性、merge 完整性、时间/空间覆盖、核心变量缺失与极端值、样本流失一致性
+- **样本构造**：描述统计前生成 Sample-construction log，逐步记录 keep/drop/merge 规则、N、Lost、Notes
+- **回归后**：报告实际使用样本量、未使用样本量、固定效应吸收情况，并与样本构造日志核对
+- **详见**：`_系统/实证检验Agent.md → Phase 1 数据审查 + Five-check Data Contract + Sample-construction log`
 
 ---
 当AI突破对话框，使用AI的方式不再是chat only。就会对AI产生更多的期待：“既然他知道，那让他直接去做好了”。AI Agent应运而生。agent是一个伟大的进步，让AI不再仅仅是“隔岸观火”，而是真的“下场灭火”，能够执行动作，能够调用其他的工具，开始尝试挑战“人”的定义。

@@ -1,11 +1,11 @@
 ---
 name: vibe-research
-description: A cyclic academic workflow for economics research (v6.0). Features a 4-block loop (Framework -> Empirical -> Writing -> Review) with Phase 0-4 empirical pipeline, multi-role peer review, Worker-Critic adversarial pairing, and integrity gates.
+description: A cyclic academic workflow for economics research (v6.1). Features a 4-block loop (Framework -> Empirical -> Writing -> Review) with Phase 0-4 empirical pipeline, Pre-Analysis Plan, sample-construction log, data contract, diagnostics, Worker-Critic adversarial pairing, and integrity gates.
 source: anthropics/skills
 license: MIT
 ---
 
-# Vibe Research (Econ Edition v6.0)
+# Vibe Research (Econ Edition v6.1)
 
 An academic research workflow system based on the **4-Block Cycle** architecture. Helps researchers build rigorous empirical analysis through iterative cycles with built-in quality gates.
 
@@ -25,7 +25,7 @@ An academic research workflow system based on the **4-Block Cycle** architecture
 - Agent: `_系统/概念框架Agent.md`
 
 ### Block 2: Empirical Analysis (`/实证`)
-- Phase 0-4 pipeline: Data Cleaning → Audit+EDA → Main Regression → Heterogeneity → Robustness
+- Phase 0-4 pipeline: Data Cleaning → Data Contract + Sample Log + EDA + Pre-Analysis Plan → Identification Graphics + Diagnostics + Progressive Main Table → Heterogeneity/Mechanisms → Robustness Registry/Specification Curve
 - VERIFY numeric source tracking, Worker-Critic internal review
 - Paper-type taxonomy with reviewer expectation checklist
 - Quantitative integrity gate (≥80 to pass)
