@@ -1,6 +1,6 @@
-# Vibe Research Workflow (Econ Edition v5.0)
+# LXs Vibe Research Workflow v6.0
 
-一个面向经济学研究的循环式AI协同工作流，基于 **4板块循环** 架构，融合 [Academic Research Skills (ARS)](https://github.com/Imbad0202/academic-research-skills) 的多角色审稿与严谨性机制，帮助研究者在"理性（Why）"与"严谨（How）"之间持续迭代。
+一个面向经济学研究的循环式AI协同工作流，基于 **4板块循环** 架构，融合多个开源项目的 Agent 设计模式，帮助研究者在"理性（Why）"与"严谨（How）"之间持续迭代。
 
 ---
 
@@ -25,18 +25,29 @@ Vibe Research 不是AI写作助手，而是**研究协同系统**。
 | 板块 | 指令 | 功能 |
 |------|------|------|
 | **概念框架** | `/框架` | 定义研究问题、文献研究（3级模式）、理论逻辑、因果识别（DAGs） |
-| **实证检验** | `/实证` | 模型设计、基准回归、异质性/机制、稳健性检验、流程摘要自动生成 |
-| **写作输出** | `/写作` | 7种写作模式（全流程/规划/提纲/修改/摘要/文献综述等）、风格校准、论断溯源审计 |
-| **论证审查** | `/审查` | 5人审稿团队、7维度0-100评分、DA让步阈值、苏格拉底辅导、图表核实 |
+| **实证检验** | `/实证` | 数据清洗→数据审查→主回归→异质性→稳健性，Phase 0-4 结构，Worker-Critic 内部批评，论文类型标注，量化评分关卡 |
+| **写作输出** | `/写作` | 7种写作模式、风格校准、论断溯源审计（含引用忠实度三档标注） |
+| **论证审查** | `/审查` | 5人审稿团队、7维度0-100评分、DA让步阈值、"什么能改变我的想法"协议、苏格拉底辅导、图表核实 |
 
 ---
 
-## v5.0 核心特性（ARS增强版）
+## v6.0 核心特性
 
 ### 多角色审稿 + 评分体系
 - **5人审稿团队**：主编 + 方法论审稿人 + 领域审稿人 + 视角审稿人 + 魔鬼代言人 + 编辑综合人
 - **7维度评分**：方法论严谨性、文献覆盖、论证强度、写作质量、创新性、可复现性、影响力
 - **决策映射**：≥80接受 / 65-79小修 / 50-64大修 / <50拒稿
+- **"什么能改变我的想法"协议**：每条反对意见必须附带具体撤回条件，让审查可操作化
+
+### 实证 Phase 体系（v6.0 新增）
+- **Phase 0-4 结构**：数据清洗 → 数据审查 + EDA → 主回归 → 异质性 → 稳健性
+- **Phase 0↔1 闭环**：审查发现问题自动回到清洗环节
+- **Worker-Critic 内部批评**：Phase 2 和 Phase 4 后自动触发，权力分离（批评时不改代码），聚焦识别漏洞、替代解释、样本选择
+- **论文类型标注**：Phase 1 自动标注论文类型（reduced-form/structural 等），输出对应审稿人期望清单
+- **VERIFY 数值来源核查**：关键数值标注 log 行号，杜绝凭记忆编造
+- **量化评分关卡**：满分 100，≥80 通过
+- **分阶段严重性梯度**：探索阶段宽容（60 分可继续），正式阶段严格（80 分才能进入写作）
+- **`[LEARN]` 经验标签**：被纠正时自动保存经验，跨会话积累
 
 ### 反谄媚机制
 - **DA让步阈值协议**：1-5分评分，仅≥4分才允许让步，让步率不超过40%
@@ -50,13 +61,14 @@ Vibe Research 不是AI写作助手，而是**研究协同系统**。
 ### 完整性关卡（不可跳过）
 - **关卡2.5**：文献研究完成后
 - **关卡4.5**：框架→实证之间
-- **实证完整性关卡**：实证→写作之间
+- **实证完整性关卡**：量化评分（满分100），分阶段严重性梯度，≥80通过进入写作
 - **审查通过关卡**：所有7维度≥75
 
 ### 写作模式多样化
 - 7种模式：full / plan（苏格拉底引导）/ outline-only / revision / revision-coach / abstract-only / lit-review
 - Fidelity-Originality光谱：忠实/平衡/原创性
 - 风格校准、论断溯源审计、AI高频词检测
+- **引用忠实度三档标注**（v6.0 新增）：直接引用/概括引用/推断引用，推断引用标记高风险
 
 ### 苏格拉底式引导
 - SCR协议（陈述-挑战-反思）
@@ -100,13 +112,19 @@ Vibe Research 不是AI写作助手，而是**研究协同系统**。
 
 ## 参考与引用
 
-- **Academic Research Skills (ARS)** by Cheng-I Wu — [GitHub](https://github.com/Imbad0202/academic-research-skills) (MIT License)
+- **Academic Research Skills (ARS) v3.7-3.9.4** by Cheng-I Wu — [GitHub](https://github.com/Imbad0202/academic-research-skills) (CC BY-NC 4.0)
+  - 贡献：IRON RULE、Anti-Pattern、7维度评分、DA让步阈值、苏格拉底引导、完整性关卡、引用忠实度审计
+- **claude-code-my-workflow** by Pedro H. C. Sant'Anna (Emory) — [GitHub](https://github.com/pedrohcgs/claude-code-my-workflow) (MIT License)
+  - 贡献：Pre-Flight Report、Orchestrator Loop、VERIFY 数值来源核查、`[LEARN]` 经验标签、计划存盘、Phase 0↔1 清洗-审查闭环
+- **CLO-Author** by Hugo Sant'Anna (UAB) — [GitHub](https://github.com/hugosantanna/clo-author) (MIT License)
+  - 贡献：Worker-Critic 对抗配对、分阶段严重性梯度、"什么能改变我的想法"协议、论文类型标准清单
 - **Karpathy's AI Coding Principles** by Andrej Karpathy
 
 ---
 
 ## 版本历史
 
+- **v6.0** (2026-05-21) — 实证 Agent 体系升级：Phase 0-4 结构、Worker-Critic 配对、论文类型标准清单、量化评分关卡、分阶段严重性梯度、引用忠实度审计、"什么能改变我的想法"协议。借鉴 Pedro Sant'Anna、CLO-Author、ARS v3.9.4。
 - **v5.0** (2026-05-21) — ARS增强版：多角色审稿、7维度评分、文献研究子工作流、写作模式多样化、完整性关卡、反谄媚机制、苏格拉底引导
 - **v4.0** (2026-02-02) — Vibe Loop四板块循环、论证审查、项目管理
 
