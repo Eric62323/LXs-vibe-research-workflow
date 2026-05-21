@@ -1,0 +1,20 @@
+# Logs
+*.log
+
+# macOS
+.DS_Store
+._*
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Stata
+.stata-cli/
+
+# Claude Code internal
+.claude/
+
+# Plans (working documents, not for publication)
+_计划/
