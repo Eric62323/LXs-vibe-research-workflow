@@ -1,4 +1,4 @@
-# LXs Vibe Research Workflow v6.1
+# LXs Vibe Research Workflow v6.2
 
 一个面向经济学实证研究的 Claude Code 协同工作流。通过 **4板块循环**（框架→实证→写作→审查），让研究者在每个阶段都有明确的AI辅助角色和完成标准，逐轮提升论文的严谨性和表达力。
 
@@ -162,6 +162,7 @@ Phase 0: 数据清洗 → Phase 1: 数据契约+样本日志+EDA+PAP → Phase 2
 
 ## 版本历史
 
+- **v6.2** (2026-06-02) — 新增研究问题面板，增强原有研究迭代日志记录功能和逻辑。
 - **v6.1** (2026-05-26) — 吸收 Awesome Stata empirical workflow：Pre-Analysis Plan、Five-check Data Contract、Sample-construction log、识别图形先行、正式诊断测试、渐进控制主表、Robustness master table 与 Specification curve。
 - **v6.0** (2026-05-21) — 实证Phase体系升级：Phase 0-4结构、Worker-Critic配对、论文类型标准清单、量化评分关卡、分阶段严重性梯度、引用忠实度审计、"什么能改变我的想法"协议。融合ARS v3.9.4、Pedro Sant'Anna、CLO-Author
 - **v5.0** (2026-05-17) — 多角色审稿与评分体系：5人审稿团队、7维度评分、文献研究子工作流、7种写作模式、完整性关卡、反谄媚机制、苏格拉底引导、认知框架。融合ARS v3.7
